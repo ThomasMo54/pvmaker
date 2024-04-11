@@ -1,0 +1,18 @@
+projects-file-path: ""
+data-columns:
+  project-number: 1
+  client: 5
+  subject: 8
+  is-ended: 18
+  end-date: 19
+  is-pv-sent: 20
+  is-pv-received: 21
+  is-pv-finished: 22
+  product-1: 31
+  product-2: 32
+  address: 33
+  city: 34
+  contact: 35
+default-data:
+  omnis-name: ""
+  redacted-place: ""

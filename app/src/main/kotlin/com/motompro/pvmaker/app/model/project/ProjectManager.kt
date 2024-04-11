@@ -1,5 +1,6 @@
 package com.motompro.pvmaker.app.model.project
 
+import com.motompro.pvmaker.app.PVMakerApp
 import org.dhatim.fastexcel.reader.ReadableWorkbook
 import java.io.File
 import kotlin.jvm.optionals.getOrNull
@@ -20,23 +21,32 @@ class ProjectManager(
     }
 
     private fun loadProjects(projectsFile: File) {
+        val dataColumns = PVMakerApp.INSTANCE.config.dataColumns
         val workbook = ReadableWorkbook(projectsFile)
         val projectsSheet = workbook.findSheet(PROJECTS_SHEET_NAME).getOrNull()
             ?: throw IllegalStateException("projects sheet not found")
         projectsSheet.openStream().skip(FIRST_PROJECT_ROW - 1).forEach { row ->
-            val projectNumber = row.getCellText(1) ?: return@forEach
+            val projectNumber = row.getCellText(dataColumns.projectNumber) ?: return@forEach
             if (projectNumber.isBlank()) return@forEach
-            val client = row.getCellText(5)
-            val subject = row.getCellText(8)
-            val isEnded = row.getCellText(18) == "2"
-            val isPVSent = !row.getCellText(20).isNullOrBlank() || !row.getCellText(21).isNullOrBlank() || !row.getCellText(22).isNullOrBlank()
+            val client = row.getCellText(dataColumns.client)
+            val subject = row.getCellText(dataColumns.subject)
+            val isEnded = row.getCellText(dataColumns.isEnded) == "2"
+            val isPVSent = !row.getCellText(dataColumns.isPvSent).isNullOrBlank() || !row.getCellText(dataColumns.isPvReceived).isNullOrBlank() || !row.getCellText(dataColumns.isPvFinished).isNullOrBlank()
+            val products = listOf(row.getCellText(dataColumns.product1), row.getCellText(dataColumns.product2))
+            val address = row.getCellText(dataColumns.address)
+            val city = row.getCellText(dataColumns.city)
+            val contact = row.getCellText(dataColumns.contact)
             val project = Project(
                 projectNumber,
                 client,
                 subject,
                 isEnded,
-                if (isEnded) row.getCellAsDate(19).getOrNull() else null,
+                if (isEnded) row.getCellAsDate(dataColumns.endDate).getOrNull() else null,
                 isPVSent,
+                products,
+                address,
+                city,
+                contact,
             )
             _projects[projectNumber] = project
         }

@@ -9,4 +9,8 @@ data class Project(
     val isEnded: Boolean,
     val endDate: LocalDateTime?,
     val isPVSent: Boolean,
+    val products: List<String>,
+    val address: String,
+    val city: String,
+    val contact: String,
 )

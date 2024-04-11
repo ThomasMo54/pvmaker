@@ -22,7 +22,9 @@ class EditPVController {
     @FXML
     lateinit var cityTextField: TextField
     @FXML
-    lateinit var productsTextField: TextField
+    lateinit var product1TextField: TextField
+    @FXML
+    lateinit var product2TextField: TextField
     @FXML
     lateinit var commandNumberTextField: TextField
     @FXML
@@ -51,7 +53,8 @@ class EditPVController {
         contactTextField.text = pv?.contact ?: ""
         addressTextField.text = pv?.address ?: ""
         cityTextField.text = pv?.city ?: ""
-        productsTextField.text = pv?.products ?: ""
+        product1TextField.text = pv?.product1 ?: ""
+        product2TextField.text = pv?.product2 ?: ""
         commandNumberTextField.text = pv?.number ?: ""
         clientNameTextField.text = pv?.clientName ?: ""
         omnisNameTextField.text = pv?.omnisName ?: ""
@@ -67,7 +70,8 @@ class EditPVController {
         pv?.contact = contactTextField.text
         pv?.address = addressTextField.text
         pv?.city = cityTextField.text
-        pv?.products = productsTextField.text
+        pv?.product1 = product1TextField.text
+        pv?.product2 = product2TextField.text
         pv?.commandNumber = commandNumberTextField.text
         pv?.clientName = clientNameTextField.text
         pv?.omnisName = omnisNameTextField.text

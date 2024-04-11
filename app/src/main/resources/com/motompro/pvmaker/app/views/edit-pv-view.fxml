@@ -71,7 +71,12 @@
                   <Insets bottom="5.0" />
                </VBox.margin>
             </Text>
-            <TextField fx:id="productsTextField" layoutX="10.0" layoutY="173.0">
+            <TextField fx:id="product1TextField" layoutX="10.0" layoutY="173.0">
+               <VBox.margin>
+                  <Insets bottom="5.0" />
+               </VBox.margin>
+            </TextField>
+            <TextField fx:id="product2TextField" layoutX="10.0" layoutY="288.0">
                <VBox.margin>
                   <Insets bottom="5.0" />
                </VBox.margin>

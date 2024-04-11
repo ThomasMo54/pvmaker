@@ -16,6 +16,7 @@ repositories {
 
 dependencies {
     testImplementation(kotlin("test"))
+    implementation("org.yaml:snakeyaml:2.2")
     implementation("org.dhatim:fastexcel:0.17.0")
     implementation("org.dhatim:fastexcel-reader:0.17.0")
     implementation("com.itextpdf:itext-core:8.0.2@pom")

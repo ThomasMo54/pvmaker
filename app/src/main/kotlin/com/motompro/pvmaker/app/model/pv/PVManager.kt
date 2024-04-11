@@ -23,19 +23,21 @@ class PVManager {
 
     fun getOrCreatePV(project: Project): PV {
         if (_pvs.containsKey(project.number)) return _pvs[project.number]!!
+        val defaultData = PVMakerApp.INSTANCE.config.defaultData
         val pv = PV(
             project.number,
             project.client,
-            "",
-            "",
-            "",
-            project.subject,
+            project.contact,
+            project.address,
+            project.city,
+            project.products.getOrNull(0) ?: "",
+            project.products.getOrNull(1) ?: "",
             project.number,
-            "",
-            "",
+            project.contact,
+            defaultData.omnisName,
             if (project.endDate != null) FULL_DATE_FORMATTER.format(project.endDate) else "",
             "",
-            "",
+            defaultData.redactedPlace,
             REDUCED_DATE_FORMATTER.format(LocalDateTime.now(ZoneId.systemDefault())),
         )
         _pvs[project.number] = pv
@@ -60,7 +62,8 @@ class PVManager {
         fields["contact"]?.setValue(pv.contact)
         fields["address"]?.setValue(pv.address)
         fields["city"]?.setValue(pv.city)
-        fields["products1"]?.setValue(pv.products)
+        fields["products1"]?.setValue(pv.product1)
+        fields["products2"]?.setValue(pv.product2)
         fields["commandNumber"]?.setValue(pv.commandNumber)
         fields["clientName"]?.setValue(pv.clientName)
         fields["omnisName"]?.setValue(pv.omnisName)

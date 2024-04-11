@@ -1,13 +1,20 @@
 package com.motompro.pvmaker.app
 
+import com.motompro.pvmaker.app.config.Config
+import com.motompro.pvmaker.app.config.ConfigManager
+import com.motompro.pvmaker.app.controller.ProjectsController
+import com.motompro.pvmaker.app.model.project.ProjectManager
 import com.motompro.pvmaker.app.model.pv.PVManager
 import javafx.application.Application
 import javafx.application.Platform
 import javafx.fxml.FXMLLoader
+import javafx.scene.Node
 import javafx.scene.Parent
 import javafx.scene.Scene
 import javafx.scene.control.Alert
 import javafx.stage.Stage
+import java.io.File
+import java.io.FileOutputStream
 import java.net.URL
 import kotlin.system.exitProcess
 
@@ -18,18 +25,31 @@ private const val MAX_ALERT_MESSAGE_LENGTH = 500
 class PVMakerApp : Application() {
 
     private val resources = mutableMapOf<String, URL>()
+    private val configFile = File(
+        File(PVMakerApp::class.java.protectionDomain.codeSource.location.path.replace("%20", " ")).parentFile,
+        "config.yml",
+    )
 
     lateinit var stage: Stage
+    lateinit var config: Config
     val pvManager = PVManager()
 
     override fun start(stage: Stage) {
         INSTANCE = this
         this.stage = stage
+        loadConfig()
 
-        val resource = PVMakerApp::class.java.getResource("views/select-file-view.fxml")
-        if (resource != null) resources["views/select-file-view.fxml"] = resource
-        val fxmlLoader = FXMLLoader(resource)
-        val scene = Scene(fxmlLoader.load(), DEFAULT_WIDTH, DEFAULT_HEIGHT)
+        val root: Parent = if (config.projectsFilePath.isBlank()) {
+            FXMLLoader(PVMakerApp::class.java.getResource("views/select-file-view.fxml")).load()
+        } else {
+            val fxmlLoader = FXMLLoader(PVMakerApp::class.java.getResource("views/projects-view.fxml"))
+            val root = fxmlLoader.load<Parent>()
+            val controller: ProjectsController = fxmlLoader.getController()
+            val projectManager = ProjectManager(File(config.projectsFilePath))
+            controller.projectManager = projectManager
+            root
+        }
+        val scene = Scene(root, DEFAULT_WIDTH, DEFAULT_HEIGHT)
         stage.title = WINDOW_TITLE
         stage.scene = scene
         stage.setOnCloseRequest {
@@ -37,6 +57,27 @@ class PVMakerApp : Application() {
             exitProcess(0)
         }
         stage.show()
+    }
+
+    private fun loadConfig() {
+        if (!configFile.exists()) {
+            configFile.createNewFile()
+            val defaultConfig = PVMakerApp::class.java.getResource("config.yml")
+            val inputStream = defaultConfig!!.openStream()
+            val outputStream = FileOutputStream(configFile)
+            val buffer = ByteArray(8 * 1024)
+            var bytesRead: Int
+            while (run { bytesRead = inputStream.read(buffer); return@run bytesRead } != -1) {
+                outputStream.write(buffer, 0, bytesRead)
+            }
+            inputStream.close()
+            outputStream.close()
+        }
+        config = ConfigManager.loadFromFile(configFile, Config::class.java)
+    }
+
+    fun saveConfig() {
+        ConfigManager.writeToFile(configFile, config)
     }
 
     fun showErrorAlert(title: String, message: String) {
