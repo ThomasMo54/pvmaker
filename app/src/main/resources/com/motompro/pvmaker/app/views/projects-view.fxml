@@ -1,24 +1,183 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Text?>
 
-<BorderPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.motompro.pvmaker.app.controller.ProjectsController">
-   <top>
-      <Text strokeType="OUTSIDE" strokeWidth="0.0" text="PV à éditer :" BorderPane.alignment="TOP_LEFT">
-         <BorderPane.margin>
-            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-         </BorderPane.margin>
-      </Text>
-   </top>
+<BorderPane prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.motompro.pvmaker.app.controller.ProjectsController">
    <center>
-      <ScrollPane fx:id="projectsScrollPane" hbarPolicy="NEVER" BorderPane.alignment="CENTER">
-         <content>
-            <VBox fx:id="projectsVBox" alignment="CENTER" />
-         </content>
-      </ScrollPane>
+      <SplitPane dividerPositions="0.5" BorderPane.alignment="CENTER">
+        <items>
+            <BorderPane>
+               <center>
+                  <ScrollPane fx:id="projectsScrollPane" hbarPolicy="NEVER" BorderPane.alignment="CENTER">
+                     <content>
+                        <VBox fx:id="projectsVBox" alignment="CENTER" />
+                     </content>
+                  </ScrollPane>
+               </center>
+               <top>
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="PV à éditer :" BorderPane.alignment="TOP_LEFT">
+                     <BorderPane.margin>
+                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                     </BorderPane.margin>
+                  </Text>
+               </top>
+            </BorderPane>
+            <BorderPane>
+               <padding>
+                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+               </padding>
+               <center>
+                  <VBox prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
+                     <children>
+                        <Text layoutX="10.0" layoutY="23.0" strokeType="OUTSIDE" strokeWidth="0.0" text="N°">
+                           <VBox.margin>
+                              <Insets bottom="5.0" />
+                           </VBox.margin>
+                        </Text>
+                        <TextField fx:id="numberTextField" layoutX="10.0" layoutY="32.0">
+                           <VBox.margin>
+                              <Insets bottom="5.0" />
+                           </VBox.margin>
+                        </TextField>
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Client">
+                           <VBox.margin>
+                              <Insets bottom="5.0" />
+                           </VBox.margin>
+                        </Text>
+                        <TextField fx:id="clientTextField">
+                           <VBox.margin>
+                              <Insets bottom="5.0" />
+                           </VBox.margin>
+                        </TextField>
+                        <Text layoutX="10.0" layoutY="23.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Contact">
+                           <VBox.margin>
+                              <Insets bottom="5.0" />
+                           </VBox.margin>
+                        </Text>
+                        <TextField fx:id="contactTextField" layoutX="10.0" layoutY="32.0">
+                           <VBox.margin>
+                              <Insets bottom="5.0" />
+                           </VBox.margin>
+                        </TextField>
+                        <Text layoutX="10.0" layoutY="75.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Adresse">
+                           <VBox.margin>
+                              <Insets bottom="5.0" />
+                           </VBox.margin>
+                        </Text>
+                        <TextField fx:id="addressTextField" layoutX="10.0" layoutY="79.0">
+                           <VBox.margin>
+                              <Insets bottom="5.0" />
+                           </VBox.margin>
+                        </TextField>
+                        <Text layoutX="10.0" layoutY="122.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Ville">
+                           <VBox.margin>
+                              <Insets bottom="5.0" />
+                           </VBox.margin>
+                        </Text>
+                        <TextField fx:id="cityTextField" layoutX="10.0" layoutY="126.0">
+                           <VBox.margin>
+                              <Insets bottom="5.0" />
+                           </VBox.margin>
+                        </TextField>
+                        <Text layoutX="10.0" layoutY="169.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Produits">
+                           <VBox.margin>
+                              <Insets bottom="5.0" />
+                           </VBox.margin>
+                        </Text>
+                        <TextField fx:id="product1TextField" layoutX="10.0" layoutY="173.0">
+                           <VBox.margin>
+                              <Insets bottom="5.0" />
+                           </VBox.margin>
+                        </TextField>
+                        <TextField fx:id="product2TextField" layoutX="10.0" layoutY="288.0">
+                           <VBox.margin>
+                              <Insets bottom="5.0" />
+                           </VBox.margin>
+                        </TextField>
+                        <Text layoutX="10.0" layoutY="213.0" strokeType="OUTSIDE" strokeWidth="0.0" text="N° Commande">
+                           <VBox.margin>
+                              <Insets bottom="5.0" />
+                           </VBox.margin>
+                        </Text>
+                        <TextField fx:id="commandNumberTextField" layoutX="10.0" layoutY="217.0">
+                           <VBox.margin>
+                              <Insets bottom="5.0" />
+                           </VBox.margin>
+                        </TextField>
+                        <Text layoutX="10.0" layoutY="262.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Soussignés">
+                           <VBox.margin>
+                              <Insets bottom="5.0" />
+                           </VBox.margin>
+                        </Text>
+                        <TextField fx:id="clientNameTextField" layoutX="10.0" layoutY="266.0" promptText="Client">
+                           <VBox.margin>
+                              <Insets bottom="5.0" />
+                           </VBox.margin>
+                        </TextField>
+                        <TextField fx:id="omnisNameTextField" layoutX="10.0" layoutY="313.0" promptText="Omnis">
+                           <VBox.margin>
+                              <Insets bottom="5.0" />
+                           </VBox.margin>
+                        </TextField>
+                        <Text layoutX="10.0" layoutY="334.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Terminé le">
+                           <VBox.margin>
+                              <Insets bottom="5.0" />
+                           </VBox.margin>
+                        </Text>
+                        <TextField fx:id="endDateTextField" layoutX="10.0" layoutY="343.0">
+                           <VBox.margin>
+                              <Insets bottom="5.0" />
+                           </VBox.margin>
+                        </TextField>
+                        <Text layoutX="10.0" layoutY="411.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Observations">
+                           <VBox.margin>
+                              <Insets bottom="5.0" />
+                           </VBox.margin>
+                        </Text>
+                        <TextArea fx:id="observationsTextField" prefHeight="100.0" prefWidth="200.0">
+                           <VBox.margin>
+                              <Insets bottom="5.0" />
+                           </VBox.margin>
+                        </TextArea>
+                        <Text layoutX="10.0" layoutY="414.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Rédigé à">
+                           <VBox.margin>
+                              <Insets bottom="5.0" />
+                           </VBox.margin>
+                        </Text>
+                        <TextField fx:id="redactedPlaceTextField" layoutX="10.0" layoutY="422.0">
+                           <VBox.margin>
+                              <Insets bottom="5.0" />
+                           </VBox.margin>
+                        </TextField>
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Rédigé le">
+                           <VBox.margin>
+                              <Insets bottom="5.0" />
+                           </VBox.margin>
+                        </Text>
+                        <TextField fx:id="redactedDateTextField">
+                           <VBox.margin>
+                              <Insets bottom="20.0" />
+                           </VBox.margin>
+                        </TextField>
+                        <HBox prefHeight="100.0" prefWidth="200.0">
+                           <children>
+                              <Button fx:id="saveButton" mnemonicParsing="false" onAction="#onRegisterButtonClick" text="Enregistrer" />
+                           </children>
+                        </HBox>
+                     </children>
+                  </VBox>
+               </center>
+            </BorderPane>
+        </items>
+      </SplitPane>
    </center>
 </BorderPane>

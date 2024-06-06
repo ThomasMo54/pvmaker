@@ -18,8 +18,8 @@ import java.io.FileOutputStream
 import java.net.URL
 import kotlin.system.exitProcess
 
-private const val DEFAULT_WIDTH = 720.0
-private const val DEFAULT_HEIGHT = 480.0
+private const val DEFAULT_WIDTH = 1280.0
+private const val DEFAULT_HEIGHT = 800.0
 private const val MAX_ALERT_MESSAGE_LENGTH = 500
 
 class PVMakerApp : Application() {

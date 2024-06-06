@@ -1,5 +1,5 @@
 group = "com.motompro"
-version = "1.1.0"
+version = "1.2.0"
 
 tasks.register<Copy>("addExecutablesToDistribution") {
     duplicatesStrategy = DuplicatesStrategy.EXCLUDE
